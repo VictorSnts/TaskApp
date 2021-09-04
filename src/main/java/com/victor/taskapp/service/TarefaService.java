@@ -1,5 +1,7 @@
 package com.victor.taskapp.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +9,32 @@ import org.springframework.stereotype.Service;
 
 import com.victor.taskapp.domain.Tarefa;
 import com.victor.taskapp.repositories.TarefaRepository;
+import com.victor.taskapp.service.util.Utils;
 
 @Service
 public class TarefaService {
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	@Autowired
 	private TarefaRepository tarefaRepository;
 
 	public List<Tarefa> getAllTasks() {
 		List<Tarefa> tarefas = tarefaRepository.findAll();
+		if (tarefas.isEmpty())
+			System.out.println("Sem Tarefas para mostrar");
+		return tarefas;
+	}
+	
+	public List<Tarefa> getTasksToday() throws ParseException {
+		List<Tarefa> tarefas = tarefaRepository.findAllByDataPlanejada(Utils.getSystemDate());
+		if (tarefas.isEmpty())
+			System.out.println("Sem Tarefas para mostrar");
+		return tarefas;
+	}
+	
+	public List<Tarefa> getTasksTomorrow() throws ParseException {
+		List<Tarefa> tarefas = tarefaRepository.findAllByDataPlanejada(Utils.getNextSystemDate());
 		if (tarefas.isEmpty())
 			System.out.println("Sem Tarefas para mostrar");
 		return tarefas;

@@ -14,16 +14,16 @@ public class TarefaDTO implements Serializable {
 	private Integer id;
 	private String titulo;
 	private Date dataInclusao;
-	private Date dataAlteracao;
+	private Date dataPlanejada;
 	private String notas;
 	private String usuario;
 
-	public TarefaDTO(Integer id, String titulo, Date dataInclusao, Date dataAlteracao, String notas, String usuario) {
+	public TarefaDTO(Integer id, String titulo, Date dataInclusao, Date dataPlanejada, String notas, String usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.dataInclusao = dataInclusao;
-		this.dataAlteracao = dataAlteracao;
+		this.dataPlanejada = dataPlanejada;
 		this.notas = notas;
 		this.usuario = usuario;
 	}
@@ -37,7 +37,7 @@ public class TarefaDTO implements Serializable {
 		this.id = tarefa.getId();
 		this.titulo = tarefa.getTitulo();
 		this.dataInclusao = tarefa.getDataInclusao();
-		this.dataAlteracao = tarefa.getDataAlteracao();
+		this.dataPlanejada = tarefa.getDataPlanejada();
 		this.notas = tarefa.getNotas();
 		this.usuario = tarefa.getUsuario();
 	}
@@ -66,12 +66,12 @@ public class TarefaDTO implements Serializable {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataAlteracao() {
-		return dataAlteracao;
+	public Date getDataPlanejada() {
+		return dataPlanejada;
 	}
 
-	public void setDataAlteracao(Date dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
+	public void setDataPlanejada(Date dataPlanejada) {
+		this.dataPlanejada = dataPlanejada;
 	}
 
 	public String getNotas() {

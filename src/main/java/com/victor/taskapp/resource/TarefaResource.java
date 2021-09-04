@@ -1,6 +1,7 @@
 package com.victor.taskapp.resource;
 
 import java.net.URI;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,32 @@ public class TarefaResource {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getTasks() {
 		List<Tarefa> tarefas = tarefaService.getAllTasks();
+		List<TarefaDTO> tarefaDTO = tarefas.stream().map(obj -> new TarefaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(tarefaDTO);
+	}
+
+	/***
+	 * Retorna todas as tarefas do dia atual
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/today", method = RequestMethod.GET)
+	public ResponseEntity<?> getTasksToday() throws ParseException {
+		List<Tarefa> tarefas = tarefaService.getTasksToday();
+		List<TarefaDTO> tarefaDTO = tarefas.stream().map(obj -> new TarefaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(tarefaDTO);
+	}
+
+	/***
+	 * Retorna todas as tarefas do dia seguinte
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/tomorrow", method = RequestMethod.GET)
+	public ResponseEntity<?> getTasksTomorrow() throws ParseException {
+		List<Tarefa> tarefas = tarefaService.getTasksTomorrow();
 		List<TarefaDTO> tarefaDTO = tarefas.stream().map(obj -> new TarefaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(tarefaDTO);
 	}
@@ -77,7 +104,13 @@ public class TarefaResource {
 		tarefa = tarefaService.putTask(tarefa);
 		return ResponseEntity.noContent().build();
 	}
-	
+
+	/***
+	 * Deleta uma tarefa
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteTask(@PathVariable Integer id) {
 		tarefaService.deleteTask(id);

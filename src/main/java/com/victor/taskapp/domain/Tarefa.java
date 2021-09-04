@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.victor.taskapp.dto.TarefaDTO;
 
@@ -19,27 +21,29 @@ public class Tarefa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
+	@Temporal(TemporalType.DATE)
 	private Date dataInclusao;
-	private Date dataAlteracao;
+	@Temporal(TemporalType.DATE)
+	private Date dataPlanejada;
 	private String notas;
 	private String usuario;
 
-	public Tarefa(Integer id, String titulo, Date dataInclusao, Date dataAlteracao, String notas, String usuario) {
+	public Tarefa(Integer id, String titulo, Date dataInclusao, Date dataPlanejada, String notas, String usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.dataInclusao = dataInclusao;
-		this.dataAlteracao = dataAlteracao;
+		this.dataPlanejada = dataPlanejada;
 		this.notas = notas;
 		this.usuario = usuario;
 	}
-	
+
 	public Tarefa(TarefaDTO tarefaDTO) {
 		super();
 		this.id = tarefaDTO.getId();
 		this.titulo = tarefaDTO.getTitulo();
 		this.dataInclusao = tarefaDTO.getDataInclusao();
-		this.dataAlteracao = tarefaDTO.getDataAlteracao();
+		this.dataPlanejada = tarefaDTO.getDataPlanejada();
 		this.notas = tarefaDTO.getNotas();
 		this.usuario = tarefaDTO.getUsuario();
 	}
@@ -72,12 +76,12 @@ public class Tarefa implements Serializable {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataAlteracao() {
-		return dataAlteracao;
+	public Date getDataPlanejada() {
+		return dataPlanejada;
 	}
 
-	public void setDataAlteracao(Date dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
+	public void setDataAlteracao(Date dataPlanejada) {
+		this.dataPlanejada = dataPlanejada;
 	}
 
 	public String getNotas() {
