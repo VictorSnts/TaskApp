@@ -39,5 +39,9 @@ public class TarefaService {
 		return tarefa;
 	}
 	
+	public void deleteTask(Integer id) {
+		tarefaRepository.deleteById(id);
+	}
+	
 
 }

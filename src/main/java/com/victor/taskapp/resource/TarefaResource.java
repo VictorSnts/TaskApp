@@ -71,10 +71,16 @@ public class TarefaResource {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody TarefaDTO tarefaDTO) {
+	public ResponseEntity<Void> putTask(@PathVariable Integer id, @RequestBody TarefaDTO tarefaDTO) {
 		Tarefa tarefa = new Tarefa(tarefaDTO);
 		tarefa.setId(id);
 		tarefa = tarefaService.putTask(tarefa);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteTask(@PathVariable Integer id) {
+		tarefaService.deleteTask(id);
 		return ResponseEntity.noContent().build();
 	}
 
