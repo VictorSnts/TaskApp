@@ -27,5 +27,17 @@ public class TarefaService {
 			System.out.println("Sem Tarefas para mostrar");
 		return tarefa;
 	}
+	
+	public Tarefa postTask(Tarefa tarefa) {
+		tarefa.setId(null);
+		tarefa = tarefaRepository.save(tarefa);
+		return tarefa;
+	}
+	
+	public Tarefa putTask(Tarefa tarefa) {
+		tarefa = tarefaRepository.save(tarefa);
+		return tarefa;
+	}
+	
 
 }

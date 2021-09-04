@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.victor.taskapp.dto.TarefaDTO;
+
 @Entity
 public class Tarefa implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,16 @@ public class Tarefa implements Serializable {
 		this.dataAlteracao = dataAlteracao;
 		this.notas = notas;
 		this.usuario = usuario;
+	}
+	
+	public Tarefa(TarefaDTO tarefaDTO) {
+		super();
+		this.id = tarefaDTO.getId();
+		this.titulo = tarefaDTO.getTitulo();
+		this.dataInclusao = tarefaDTO.getDataInclusao();
+		this.dataAlteracao = tarefaDTO.getDataAlteracao();
+		this.notas = tarefaDTO.getNotas();
+		this.usuario = tarefaDTO.getUsuario();
 	}
 
 	public Tarefa() {
