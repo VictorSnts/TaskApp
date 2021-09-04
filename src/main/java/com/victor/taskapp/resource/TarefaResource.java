@@ -64,6 +64,32 @@ public class TarefaResource {
 	}
 
 	/***
+	 * Retorna todas as tarefas dos dias apos D+1
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/future", method = RequestMethod.GET)
+	public ResponseEntity<?> getTasksFuture() throws ParseException {
+		List<Tarefa> tarefas = tarefaService.getTasksFuture();
+		List<TarefaDTO> tarefaDTO = tarefas.stream().map(obj -> new TarefaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(tarefaDTO);
+	}
+
+	/***
+	 * Retorna todas as tarefas atrasadas
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/past", method = RequestMethod.GET)
+	public ResponseEntity<?> getTasksPast() throws ParseException {
+		List<Tarefa> tarefas = tarefaService.getTasksPast();
+		List<TarefaDTO> tarefaDTO = tarefas.stream().map(obj -> new TarefaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(tarefaDTO);
+	}
+
+	/***
 	 * Retorna uma tarefa especifica
 	 * 
 	 * @param id
@@ -81,9 +107,10 @@ public class TarefaResource {
 	 * 
 	 * @param tarefaDTO
 	 * @return
+	 * @throws ParseException
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> putTask(@RequestBody TarefaDTO tarefaDTO) {
+	public ResponseEntity<Void> putTask(@RequestBody TarefaDTO tarefaDTO) throws ParseException {
 		Tarefa tarefa = new Tarefa(tarefaDTO);
 		tarefa = tarefaService.postTask(tarefa);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tarefa.getId()).toUri();
