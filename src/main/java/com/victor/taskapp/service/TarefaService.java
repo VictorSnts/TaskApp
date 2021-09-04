@@ -10,16 +10,22 @@ import com.victor.taskapp.repositories.TarefaRepository;
 
 @Service
 public class TarefaService {
-	
+
 	@Autowired
 	private TarefaRepository tarefaRepository;
-	
-	public List<Tarefa> listar() {
+
+	public List<Tarefa> getAllTasks() {
 		List<Tarefa> tarefas = tarefaRepository.findAll();
 		if (tarefas.isEmpty())
-			System.out.println("Sem Tarefas para mostrar");;
+			System.out.println("Sem Tarefas para mostrar");
 		return tarefas;
 	}
-	
+
+	public Tarefa getTask(Integer id) {
+		Tarefa tarefa = tarefaRepository.findById(id).get();
+		if (tarefa.equals(null))
+			System.out.println("Sem Tarefas para mostrar");
+		return tarefa;
+	}
 
 }
