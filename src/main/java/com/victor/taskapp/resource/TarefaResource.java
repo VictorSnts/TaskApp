@@ -33,6 +33,7 @@ public class TarefaResource {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getTasks() {
 		List<Tarefa> tarefas = tarefaService.getAllTasks();
+		System.out.println(tarefas);
 		List<TarefaDTO> tarefaDTO = tarefas.stream().map(obj -> new TarefaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(tarefaDTO);
 	}
@@ -127,7 +128,8 @@ public class TarefaResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> putTask(@PathVariable Integer id, @RequestBody TarefaDTO tarefaDTO) {
 		Tarefa tarefa = new Tarefa(tarefaDTO);
-		tarefa.setId(id);
+		tarefa.setId(id); 
+		System.out.println(tarefa.getDataPlanejada());
 		tarefa = tarefaService.putTask(tarefa);
 		return ResponseEntity.noContent().build();
 	}
