@@ -1,6 +1,7 @@
 package com.victor.taskapp.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -23,12 +24,11 @@ public class Tarefa implements Serializable {
 	private String titulo;
 	@Temporal(TemporalType.DATE)
 	private Date dataInclusao;
-	@Temporal(TemporalType.DATE)
-	private Date dataPlanejada;
+	private LocalDate dataPlanejada;
 	private String notas;
 	private String usuario;
 
-	public Tarefa(Integer id, String titulo, Date dataInclusao, Date dataPlanejada, String notas, String usuario) {
+	public Tarefa(Integer id, String titulo, Date dataInclusao, LocalDate dataPlanejada, String notas, String usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -76,11 +76,11 @@ public class Tarefa implements Serializable {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataPlanejada() {
+	public LocalDate getDataPlanejada() {
 		return dataPlanejada;
 	}
 
-	public void setDataAlteracao(Date dataPlanejada) {
+	public void setDataAlteracao(LocalDate dataPlanejada) {
 		this.dataPlanejada = dataPlanejada;
 	}
 

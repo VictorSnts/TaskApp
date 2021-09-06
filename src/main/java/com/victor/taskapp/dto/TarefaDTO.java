@@ -1,6 +1,7 @@
 package com.victor.taskapp.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
@@ -14,11 +15,11 @@ public class TarefaDTO implements Serializable {
 	private Integer id;
 	private String titulo;
 	private Date dataInclusao;
-	private Date dataPlanejada;
+	private LocalDate dataPlanejada;
 	private String notas;
 	private String usuario;
 
-	public TarefaDTO(Integer id, String titulo, Date dataInclusao, Date dataPlanejada, String notas, String usuario) {
+	public TarefaDTO(Integer id, String titulo, Date dataInclusao, LocalDate dataPlanejada, String notas, String usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -66,11 +67,11 @@ public class TarefaDTO implements Serializable {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataPlanejada() {
+	public LocalDate getDataPlanejada() {
 		return dataPlanejada;
 	}
 
-	public void setDataPlanejada(Date dataPlanejada) {
+	public void setDataPlanejada(LocalDate dataPlanejada) {
 		this.dataPlanejada = dataPlanejada;
 	}
 
